@@ -1,0 +1,271 @@
+%--------------------------------------------------------------------------
+% setlog.m
+% Can bus method for setting up a data Log
+%
+% Use:     canlog(N)
+% Inputs:  N, an index to the particular setup desired
+% Outputs: none.
+% Errors:  possible warnings if CAN bus is not operable.
+% Calls:   mex4.mexw32.
+%
+% Tom Flint, Arkansas Power Electronics International
+% 7/25/14 
+%--------------------------------------------------------------------------
+function setlog(N)
+
+switch(N),
+    case 1,
+        % test single-shot read of isrCountF
+        canwri('LogSingle',1);
+        canwri('LogChan',1);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('isrCountF'));
+        canwri('LogInit',1);
+    case 2,
+        % test single-shot read of isrCountF, ThetaOut, OmegaOut
+        canwri('LogSingle',1);
+        canwri('LogChan',3);
+        canwri('LogSkip',100);
+        canwri('LogAddr0',getaddr('EncoderIndexCount'));
+        canwri('LogAddr1',getaddr('ThetaOut'));
+        canwri('LogAddr2',getaddr('OmegaOut'));
+        canwri('LogInit',1);
+    case 3,
+        % test single-shot read of isrCountF, ThetaOut, OmegaOut with skip
+        canwri('LogSingle',1);
+        canwri('LogChan',3);
+        canwri('LogSkip',100);
+        canwri('LogAddr0',getaddr('isrCountF'));
+        canwri('LogAddr1',getaddr('ThetaOut'));
+        canwri('LogAddr2',getaddr('OmegaOut'));
+        canwri('LogInit',1);
+    case 4,
+        % test circular buffer read of isrCountF, ThetaOut, OmegaOut with skip
+        canwri('LogSingle',0);
+        canwri('LogChan',3);
+        canwri('LogSkip',100);
+        canwri('LogAddr0',getaddr('isrCountF'));
+        canwri('LogAddr1',getaddr('ThetaOut'));
+        canwri('LogAddr2',getaddr('OmegaOut'));
+        canwri('LogInit',1);
+    case 5,
+        % test circular buffer read of isrCountF, ThetaOut, OmegaOut with skip
+        canwri('LogSingle',0);
+        canwri('LogChan',4);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('isrCountF'));
+        canwri('LogAddr1',getaddr('ThetaOut'));
+        canwri('LogAddr2',getaddr('OmegaOut'));
+        canwri('LogAddr3',getaddr('EncoderV2'));
+        canwri('LogInit',1);
+    case 6,
+        canwri('LogSingle',1);
+        canwri('LogChan',5);
+        canwri('LogSkip',20);
+        canwri('LogAddr0',getaddr('Ia'));
+        canwri('LogAddr1',getaddr('Ib'));
+        canwri('LogAddr2',getaddr('Ic'));
+        canwri('LogAddr3',getaddr('ThetaOut'));
+        canwri('LogAddr4',getaddr('OmegaOut'));
+        canwri('LogInit',1);
+    case 7,
+        canwri('LogSingle',0);
+        canwri('LogChan',7);
+        canwri('LogSkip',500);
+        canwri('LogAddr0',getaddr('IdRef'));
+        canwri('LogAddr1',getaddr('IqRef'));
+        canwri('LogAddr2',getaddr('AlignTime'));
+        canwri('LogAddr3',getaddr('Id'));
+        canwri('LogAddr4',getaddr('Iq'));
+        canwri('LogAddr5',getaddr('VdRef'));
+        canwri('LogAddr6',getaddr('VqRef'));
+        canwri('LogInit',1);
+    case 8,
+        canwri('LogSingle',1);
+        canwri('LogChan',9);
+        canwri('LogSkip',149);
+        canwri('LogAddr0',getaddr('IdRef'));
+        canwri('LogAddr1',getaddr('IqRef'));
+        canwri('LogAddr2',getaddr('WeRef'));
+        canwri('LogAddr3',getaddr('Id'));
+        canwri('LogAddr4',getaddr('Iq'));
+        canwri('LogAddr5',getaddr('We'));
+        canwri('LogAddr6',getaddr('VdRef'));
+        canwri('LogAddr7',getaddr('VqRef'));
+        canwri('LogAddr8',getaddr('ThetaOut'));
+        canwri('LogInit',1);
+    case 9,
+        canwri('LogSingle',0);
+        canwri('LogChan',9);
+        canwri('LogSkip',9);
+        canwri('LogAddr0',getaddr('IdRef'));
+        canwri('LogAddr1',getaddr('IqRef'));
+        canwri('LogAddr2',getaddr('ThetaOut'));
+        canwri('LogAddr3',getaddr('Id'));
+        canwri('LogAddr4',getaddr('Iq'));
+        canwri('LogAddr5',getaddr('OmegaOut'));
+        canwri('LogAddr6',getaddr('VdRef'));
+        canwri('LogAddr7',getaddr('VqRef'));
+        canwri('LogAddr8',getaddr('IqInt'));
+        canwri('LogInit',1);
+    case 10,
+        canwri('LogSingle',0);
+        canwri('LogChan',8);
+        canwri('LogSkip',1000);
+        canwri('LogAddr0',getaddr('EncoderRaw'));
+        canwri('LogAddr1',getaddr('EncoderOld'));
+        canwri('LogAddr2',getaddr('EncoderIndexCount'));
+        canwri('LogAddr3',getaddr('EncoderXhat'));
+        canwri('LogAddr4',getaddr('EncoderErr'));
+        canwri('LogAddr5',getaddr('ThetaOutE'));
+        canwri('LogAddr6',getaddr('EncoderVout'));
+        canwri('LogAddr7',getaddr('EncoderErrInt'));
+        canwri('LogInit',1);
+    case 11,
+        canwri('LogSingle',1);
+        canwri('LogChan',9);
+        canwri('LogSkip',2000);
+        canwri('LogAddr0',getaddr('IdRef'));
+        canwri('LogAddr1',getaddr('IqRef'));
+        canwri('LogAddr2',getaddr('WeRef'));
+        canwri('LogAddr3',getaddr('Id'));
+        canwri('LogAddr4',getaddr('Iq'));
+        canwri('LogAddr5',getaddr('We'));
+        canwri('LogAddr6',getaddr('VdRef'));
+%        canwri('LogAddr6',getaddr('In'));
+        canwri('LogAddr7',getaddr('VqRef'));
+%        canwri('LogAddr8',getaddr('In'));
+%        canwri('LogAddr8',getaddr('ThetaOut'));
+%        canwri('LogAddr8',getaddr('WeError'));
+        canwri('LogAddr8',getaddr('Vbus'));
+        canwri('LogInit',1);
+    case 12,
+        canwri('LogSingle',0);
+        canwri('LogChan',2);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('Id'));
+        canwri('LogAddr1',getaddr('Iq'));
+        canwri('LogInit',1);
+    case 13,
+        canwri('LogSingle',0);
+        canwri('LogChan',9);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('IdRef'));
+        canwri('LogAddr1',getaddr('IqRef'));
+        canwri('LogAddr2',getaddr('WeRef'));
+        canwri('LogAddr3',getaddr('Id'));
+        canwri('LogAddr4',getaddr('Iq'));
+        canwri('LogAddr5',getaddr('We'));
+        canwri('LogAddr6',getaddr('Ia'));
+%        canwri('LogAddr6',getaddr('In'));
+        canwri('LogAddr7',getaddr('Ib'));
+%        canwri('LogAddr8',getaddr('In'));
+%        canwri('LogAddr8',getaddr('ThetaOut'));
+%        canwri('LogAddr8',getaddr('WeError'));
+        canwri('LogAddr8',getaddr('Ic'));
+        canwri('LogInit',1);
+    case 14,
+        canwri('LogSingle',1);
+        canwri('LogChan',3);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('Ia'));
+        canwri('LogAddr1',getaddr('Ib'));
+        canwri('LogAddr2',getaddr('Ic'));
+        canwri('LogInit',1);
+    case 15,
+        canwri('LogSingle',1);
+        canwri('LogChan',2);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('ResSin'));
+        canwri('LogAddr1',getaddr('ResCos'));
+        canwri('LogInit',1);
+    case 16,
+        canwri('LogSingle',1);
+        canwri('LogChan',3);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('VbusHi'));
+        canwri('LogAddr1',getaddr('VbusLow'));
+        canwri('LogAddr2',getaddr('Vbus'));
+        canwri('LogInit',1);
+    case 17,
+        canwri('LogSingle',1);
+        canwri('LogChan',3);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('RtdA'));
+        canwri('LogAddr1',getaddr('RtdB'));
+        canwri('LogAddr2',getaddr('RtdC'));
+        canwri('LogInit',1);
+    case 18,
+        canwri('LogSingle',1);
+        canwri('LogChan',6);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('IdRef'));
+        canwri('LogAddr1',getaddr('IqRef'));
+        canwri('LogAddr2',getaddr('Id'));
+        canwri('LogAddr3',getaddr('Iq'));
+        canwri('LogAddr4',getaddr('VdRef'));
+        canwri('LogAddr5',getaddr('VqRef'));
+        canwri('LogInit',1);
+    case 19,
+        canwri('LogSingle',1);
+        canwri('LogChan',9);
+        canwri('LogSkip',999);
+        canwri('LogAddr0',getaddr('IdRef'));
+        canwri('LogAddr1',getaddr('IqRef'));
+        canwri('LogAddr2',getaddr('WeRef'));
+        canwri('LogAddr3',getaddr('Id'));
+        canwri('LogAddr4',getaddr('Iq'));
+        canwri('LogAddr5',getaddr('We'));
+        canwri('LogAddr6',getaddr('VdRef'));
+%        canwri('LogAddr6',getaddr('In'));
+        canwri('LogAddr7',getaddr('VqRef'));
+%        canwri('LogAddr8',getaddr('In'));
+%        canwri('LogAddr8',getaddr('ThetaOut'));
+%        canwri('LogAddr8',getaddr('WeError'));
+        canwri('LogAddr8',getaddr('Ts'));
+        canwri('LogInit',1);
+    case 20,
+        canwri('LogSingle',1);
+        canwri('LogChan',4);
+        canwri('LogSkip',0);
+        canwri('LogAddr0',getaddr('Ia'));
+        canwri('LogAddr1',getaddr('Ib'));
+        canwri('LogAddr2',getaddr('Ic'));
+        canwri('LogAddr3',getaddr('Vbus'));
+        canwri('LogInit',1);
+    case 21,
+        canwri('LogSingle',1);
+        canwri('LogChan',9);
+        canwri('LogSkip',1000);
+        canwri('LogAddr0',getaddr('ResSin'));
+        canwri('LogAddr1',getaddr('ThetaOutR'));
+        canwri('LogAddr2',getaddr('OmegaOutR'));
+        canwri('LogAddr3',getaddr('ResCos'));
+        canwri('LogAddr4',getaddr('ResTheta'));
+        canwri('LogAddr5',getaddr('ResCount'));
+        canwri('LogAddr6',getaddr('ResE'));
+        canwri('LogAddr7',getaddr('ResAlpha'));
+%        canwri('LogAddr8',getaddr('ResOmega'));
+        canwri('LogAddr8',getaddr('ResExc'));
+        canwri('LogInit',1);
+    case 22,
+        canwri('LogSingle',1);
+        canwri('LogChan',4);
+        canwri('LogSkip',500);
+        canwri('LogAddr0',getaddr('ThetaOutR'));
+        canwri('LogAddr1',getaddr('OmegaOutR'));
+        canwri('LogAddr2',getaddr('ThetaOutE'));
+        canwri('LogAddr3',getaddr('OmegaOutE'));
+        canwri('LogInit',1);
+    otherwise,
+        fprintf('No log setup %d\n',N);
+end;
+
+
+
+
+
+
+
+
+%--------------------------------------------------------------------------
